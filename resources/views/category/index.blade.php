@@ -44,7 +44,7 @@
                                                 @csrf
                                                 {{ @method_field('DELETE') }}
 
-                                                <button class="btn btn-outline-danger">Delete</button>
+                                                <button class="btn btn-outline-danger" onclick="return confirm('Are You Sure? Want to Delete It.');">Delete</button>
                                             </form>
                                         </a>
                                     </td>

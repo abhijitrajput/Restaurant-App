@@ -29,3 +29,4 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
 })->name('dashboard');
 
 Route::resource('category', 'CategoryController');
+Route::resource('food', 'FoodController');
