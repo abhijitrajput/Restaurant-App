@@ -43,6 +43,12 @@
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ml-auto">
                         <!-- Authentication Links -->
+                        @if(Auth::check())
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('category.index') }}">{{ __('Category') }}</a>
+                        </li>
+                        @endif
+
                         @guest
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>

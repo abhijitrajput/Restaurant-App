@@ -27,7 +27,7 @@
                     </div>
                     <div class="form-group">
                         <label for="description">Description</label>
-                        <input type="textarea" name="description" id="description" class="form-control @error('description') is-invalid @enderror">
+                        <input type="textarea" name="description" id="description" class="form-control @error('description') is-invalid @enderror"></textarea>
                     @error('description')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
