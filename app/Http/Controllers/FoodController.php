@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use Illuminate\Http\Request;
-use App\Food;
+use App\Models\Food;
 class FoodController extends Controller
 {
     /**
@@ -13,7 +14,10 @@ class FoodController extends Controller
      */
     public function index()
     {
-        return view('food.create');
+
+        $foods = Food::latest()->get();
+        return view('food.index',compact('foods'));
+
     }
 
     /**
@@ -23,7 +27,8 @@ class FoodController extends Controller
      */
     public function create()
     {
-        return view('food.create');
+        $category = Category::all();
+        return view('food.create',compact('category'));
     }
 
     /**
@@ -34,7 +39,26 @@ class FoodController extends Controller
      */
     public function store(Request $request)
     {
-        //return view();
+       $this->validate($request,[
+            'name'=>'required',
+            'description'=>'required',
+            'price'=>'required|integer',
+            'category'=>'required',
+            'image'=>'required|mimes:png,jpeg,jpg'
+       ]);
+       $image = $request->file('image');
+       $name = $image->getClientOriginalName();
+       $destinationPath = public_path('/images');
+       $image->move($destinationPath,$name);
+       Food::create([
+            'name' => $request->get('name'),
+            'description' => $request->get('description'),
+            'price' => $request->get('price'),
+            'category_id' => $request->get('category'),
+            'image' => $name
+
+       ]);
+       return redirect()->back()->with('message','Food Added to the cart');
     }
 
     /**
